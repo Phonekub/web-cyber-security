@@ -41,21 +41,13 @@ function App() {
   return (
     <Card className="container">
       <div className="header">
-        <div className="fontheader">Login</div>
-        <div className="underline1"></div>
+        <div className="fontheader">Forget Password</div>
+        <div className="underline2"></div>
       </div>
-
-      <form className="inputs" onSubmit={handleSubmit}>
-        <div className="input">
-          <FontAwesomeIcon icon={faUser} className="icon" />
-          <input
-            type="text"
-            placeholder="User"
-            className="text"
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-          />
+        <div className="decemail">
+            Enter Your Email Address
         </div>
+      <form className="inputs" onSubmit={handleSubmit}>
         <div className="input">
           <FontAwesomeIcon icon={faEnvelope} className="icon" />
           <input
@@ -66,31 +58,13 @@ function App() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="input">
-          <FontAwesomeIcon icon={faLock} className="icon" />
-          <input
-            type="password"
-            placeholder="Password"
-            className="text"
-            value={pwd}
-            onChange={(e) => setPwd(e.target.value)}
-          />
-        </div>
-        <div className="error">{all}</div>
-        <div className="forget">
-          Forget? <span onClick={() => navigate("/forget")}>Click Here!</span>
-        </div>
-        <div className="cap">
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            sitekey="6LdsiOYrAAAAAJ0j5O5_kUkGYnPojF2YBvrLSGzW"
-            onChange={onCaptchaChange}
-          />
-        </div>
-        <div className="submit-container">
-          
-          <Button type="submit" variant="contained" className="submit" disabled={!captchaToken}>
-            Login
+       
+        
+       
+       
+        <div className="submit-container1">  
+          <Button type="submit" variant="contained" className="submit" disabled={!email}>
+            Send
           </Button>
         </div>
       </form>

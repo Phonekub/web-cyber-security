@@ -97,7 +97,7 @@ function App() {
         <div className="error">{all}</div>
         <div className="error">{pwderror}</div>
         <div className="forget">
-          Forget? <span>Click Here!</span>
+          Forget? <span onClick={() => navigate("/forget")}>Click Here!</span>
         </div>
         <div className="cap">
           <ReCAPTCHA
