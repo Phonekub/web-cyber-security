@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(24, 131, 253);
+  background-image: url("https://www.shutterstock.com/image-illustration/abstract-blue-futuristic-background-big-600nw-1729069588.jpg");  
+  background-size: cover;            
+  background-position: center;       
+  background-attachment: fixed;
+
 }
 
 code {
