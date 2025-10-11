@@ -2,7 +2,13 @@ import React, { useState, useRef } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope, faLock,faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faEnvelope,
+  faLock,
+  faEye,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,14 +25,13 @@ function App() {
   const toggleShowPwd2 = () => setShowPwd2((prev) => !prev);
 
   const [pwderror, setPwderror] = useState("");
-  const [all, setAll] =useState("");
+  const [all, setAll] = useState("");
   const [role, setRole] = useState("user");
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [serverError, setServerError] = useState("");
   const [showerror, setShowerror] = useState("");
-
 
   const onCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
@@ -36,7 +41,7 @@ function App() {
     e.preventDefault();
     setAll("");
     setPwderror("");
-    setShowerror("")
+    setShowerror("");
     if (!user || !email || !pwd || !pwd2) {
       setAll("*กรอกข้อมูลไม่ครบ");
       return;
@@ -52,37 +57,29 @@ function App() {
     }
     // console.log({ user, email, pwd, captchaToken });
 
-      try {
-      
+    try {
       const res = await axios.post(
-        "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/users", 
+        "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/users",
         {
           USERNAME: user,
           EMAILADDR: email,
           ROLE: role,
           PASSWORD: pwd,
-          
-        },
+        }
       );
 
-      
-        navigate("/login");
-      
-      } catch (err: any) {
+      navigate("/login");
+    } catch (err: any) {
       // console.log("response:", err.data);
       // console.error(err);
-      console.log(err.response.data.error)
+      console.log(err.response.data.error);
       setShowerror(err.response.data.error);
-      setServerError(
-        err.response?.data?.message || "Server Disconnect"
-      );
+      setServerError(err.response?.data?.message || "Server Disconnect");
       // recaptchaRef.current?.reset();
       // setCaptchaToken(null);
     }
-
   };
 
-  
   return (
     <Card className="container">
       <div className="header">
@@ -163,7 +160,12 @@ function App() {
           >
             Sign Up
           </Button>
-          <Button type="button" variant="outlined" className="submit" onClick={() => navigate("/login")}>
+          <Button
+            type="button"
+            variant="outlined"
+            className="submit"
+            onClick={() => navigate("/login")}
+          >
             Login
           </Button>
         </div>
