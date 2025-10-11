@@ -20,10 +20,13 @@ function App() {
 
   const [pwderror, setPwderror] = useState("");
   const [all, setAll] =useState("");
+  const [role, setRole] = useState("user");
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [serverError, setServerError] = useState("");
+  const [showerror, setShowerror] = useState("");
+
 
   const onCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
@@ -31,59 +34,55 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    setAll("");
+    setPwderror("");
+    setShowerror("")
     if (!user || !email || !pwd || !pwd2) {
       setAll("*กรอกข้อมูลไม่ครบ");
-      setUser("");
-      setEmail("");
-      setPwd("");
-      setPwd2("");
+      return;
     }
     if (pwd !== pwd2) {
       setPwderror("*password not correct");
-      setUser("");
-      setEmail("");
-      setPwd("");
       setPwd2("");
+      return;
     }
     if (!captchaToken) {
       alert("Confirm reCAPTCHA");
       return;
     }
-    console.log({ user, email, pwd, captchaToken });
+    // console.log({ user, email, pwd, captchaToken });
 
       try {
       
       const res = await axios.post(
-        "http://localhost:3001/api/auth/signup", 
+        "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/users", 
         {
-          username: user,
-          email: email,
-          password: pwd,
-          captchaToken: captchaToken,
+          USERNAME: user,
+          EMAILADDR: email,
+          ROLE: role,
+          PASSWORD: pwd,
+          
         },
       );
 
-      console.log("response:", res.data);
-
-      if (res.data.success) {
+      
         navigate("/login");
-      } 
-      // else {
-      //   setServerError(res.data.message || "สมัครไม่สำเร็จ");
-      // }
-    } catch (err: any) {
-      console.error(err);
+      
+      } catch (err: any) {
+      // console.log("response:", err.data);
+      // console.error(err);
+      console.log(err.response.data.error)
+      setShowerror(err.response.data.error);
       setServerError(
         err.response?.data?.message || "Server Disconnect"
       );
-      recaptchaRef.current?.reset();
-      setCaptchaToken(null);
+      // recaptchaRef.current?.reset();
+      // setCaptchaToken(null);
     }
 
   };
-  
 
+  
   return (
     <Card className="container">
       <div className="header">
@@ -144,6 +143,7 @@ function App() {
         </div>
         <div className="error">{all}</div>
         <div className="error">{pwderror}</div>
+        <div className="error"> {showerror}</div>
         <div className="forget">
           Forget? <span onClick={() => navigate("/forget")}>Click Here!</span>
         </div>
