@@ -4,7 +4,10 @@ import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router-dom";
 function App() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
@@ -112,7 +115,7 @@ function App() {
           >
             Sign Up
           </Button>
-          <Button type="button" variant="outlined" className="submit">
+          <Button type="button" variant="outlined" className="submit" onClick={() => navigate("/login")}>
             Login
           </Button>
         </div>
