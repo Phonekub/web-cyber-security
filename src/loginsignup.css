@@ -5,10 +5,82 @@
     margin: auto;
     margin-top: 200px;
     width: 450px;
-    height: 400px;
+    height: 500px;
 }
 .inputs{
-    padding: auto;
-    padding-left:30%;
     padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+.input{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    background-color: rgb(223, 222, 222);
+    width: 300px;
+    height: 40px;
+    border-radius: 6px;
+
+}
+.header{
+    padding-top: 5%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.fontheader{
+    font-size: 30px;
+    font-weight: 600;
+    color: blueviolet;
+}
+.underline{
+    background-color:blueviolet;
+    width: 110px;
+    height: 4px;
+    border-radius: 10px;
+    margin-top: 1%;
+}
+.icon{
+    margin-left: 3%;
+    font-size: 20px;
+    padding-right: 3%;
+}
+.input input{
+    background-color: transparent;
+    height: 30px;
+    width: 240px;
+    border-width: 0;
+}
+.submit-container{
+    display: flex;
+    gap:30px;
+    margin: 40px auto;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 120px;
+    background-color: rgb(0, 162, 255);
+    color: aliceblue;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.text{
+    padding-left: 3%;
+}
+.forget{
+    padding-left:75px;
+    font-size: 15px;
+    font-weight:400;
+}
+.forget span{
+    color: rgb(250, 0, 0);
+    font-size: 15px;
+    font-weight:400;
+    cursor: pointer;
 }
