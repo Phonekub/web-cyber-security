@@ -5,7 +5,7 @@
     margin: auto;
     margin-top: 200px;
     width: 450px;
-    height: 500px;
+    height: 550px;
 }
 .inputs{
     padding-top: 10%;
@@ -55,7 +55,7 @@
 .submit-container{
     display: flex;
     gap:30px;
-    margin: 40px auto;
+    margin:auto;
 }
 .submit{
     display: flex;
@@ -83,4 +83,9 @@
     font-size: 15px;
     font-weight:400;
     cursor: pointer;
+}
+.cap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
