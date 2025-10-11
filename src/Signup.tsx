@@ -19,6 +19,7 @@ function App() {
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [serverError, setServerError] = useState("");
 
   const onCaptchaChange = (token: string | null) => {
     setCaptchaToken(token);
@@ -46,7 +47,40 @@ function App() {
       return;
     }
     console.log({ user, email, pwd, captchaToken });
+
+      try {
+      
+      const res = await axios.post(
+        "http://localhost:3001/api/auth/signup", 
+        {
+          username: user,
+          email: email,
+          password: pwd,
+          captchaToken: captchaToken,
+        },
+      );
+
+      console.log("response:", res.data);
+
+      if (res.data.success) {
+        navigate("/login");
+      } 
+      // else {
+      //   setServerError(res.data.message || "สมัครไม่สำเร็จ");
+      // }
+    } catch (err: any) {
+      console.error(err);
+      setServerError(
+        err.response?.data?.message || "Server Disconnect"
+      );
+      recaptchaRef.current?.reset();
+      setCaptchaToken(null);
+    }
+
   };
+  
+  
+
   return (
     <Card className="container">
       <div className="header">
