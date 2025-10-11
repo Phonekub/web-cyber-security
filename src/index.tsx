@@ -16,10 +16,10 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<Signup />} />
+        <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/forget" element={<Forget />} /> */}
-        <Route path="/" element={<Changepassword />} />
+        <Route path="/forget" element={<Forget />} />
+        {/* <Route path="/" element={<Changepassword />} /> */}
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
