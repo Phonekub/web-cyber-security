@@ -42,7 +42,7 @@ function App() {
     <Card className="container">
       <div className="header">
         <div className="fontheader">Login</div>
-        <div className="underline"></div>
+        <div className="underline1"></div>
       </div>
 
       <form className="inputs" onSubmit={handleSubmit}>
