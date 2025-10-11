@@ -2,23 +2,31 @@ import React, { useState, useRef } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope, faLock,faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faEnvelope,
+  faLock,
+  faEye,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState("");
-  const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
   const [pwderror, setPwderror] = useState("");
-  const [all, setAll] =useState("");
+  const [all, setAll] = useState("");
+
+  const [showerror, setShowerror] = useState("");
+  const [serverError, setServerError] = useState("");
 
   const [showPwd, setShowPwd] = useState(false);
   const toggleShowPwd = () => setShowPwd((prev) => !prev);
-
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -29,19 +37,39 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!user || !email || !pwd ) {
+    setAll("");
+    if (!user || !pwd) {
       setAll("*กรอกข้อมูลไม่ครบ");
       setUser("");
-      setEmail("");
       setPwd("");
     }
     if (!captchaToken) {
       alert("Confirm reCAPTCHA");
       return;
     }
-    console.log({ user, email, pwd, captchaToken });
+    // console.log({ user, email, pwd, captchaToken });
+
+    try {
+      const res = await axios.post(
+        "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/login",
+        {
+          USERNAME: user,
+          PASSWORD: pwd,
+        }
+      );
+
+      navigate("/forget"); //อย่าลืมเปลี่ยน
+    } catch (err: any) {
+      // console.log("response:", err.data);
+      // console.error(err);
+      console.log(err.response.data.error);
+      setShowerror(err.response.data.error);
+      setServerError(err.response?.data?.message || "Server Disconnect");
+      // recaptchaRef.current?.reset();
+      // setCaptchaToken(null);
+    }
   };
+
   return (
     <Card className="container">
       <div className="header">
@@ -60,16 +88,7 @@ function App() {
             onChange={(e) => setUser(e.target.value)}
           />
         </div>
-        <div className="input">
-          <FontAwesomeIcon icon={faEnvelope} className="icon" />
-          <input
-            type="email"
-            placeholder="Email"
-            className="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+
         <div className="input password-input">
           <FontAwesomeIcon icon={faLock} className="icon" />
           <input
@@ -80,12 +99,13 @@ function App() {
             onChange={(e) => setPwd(e.target.value)}
           />
           <FontAwesomeIcon
-              icon={showPwd ? faEyeSlash : faEye}
-              className="eye-icon"
-              onClick={toggleShowPwd}
-            />
+            icon={showPwd ? faEyeSlash : faEye}
+            className="eye-icon"
+            onClick={toggleShowPwd}
+          />
         </div>
         <div className="error">{all}</div>
+        <div className="error"> {showerror}</div>
         <div className="forget">
           Forget? <span onClick={() => navigate("/forget")}>Click Here!</span>
         </div>
@@ -97,8 +117,12 @@ function App() {
           />
         </div>
         <div className="submit-container">
-          
-          <Button type="submit" variant="contained" className="submit" disabled={!captchaToken}>
+          <Button
+            type="submit"
+            variant="contained"
+            className="submit"
+            disabled={!captchaToken}
+          >
             Login
           </Button>
         </div>
