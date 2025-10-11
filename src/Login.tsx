@@ -89,7 +89,7 @@ function App() {
         </div>
         <div className="submit-container">
           
-          <Button type="submit" variant="contained" className="submit">
+          <Button type="submit" variant="contained" className="submit" disabled={!captchaToken}>
             Login
           </Button>
         </div>
