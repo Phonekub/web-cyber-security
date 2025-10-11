@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
+import Homepage from './page/Homepage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import Forget from './Forget';
 import Changepassword from './Changepassword';
 
+import "./index.css";
+import SystemLog from './page/SystemLog';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -16,10 +18,12 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/" element={<Homepage/>} />
+        <Route path="/system-log" element={<SystemLog/>}/>  
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forget" element={<Forget />} />
-        <Route path="/changemail" element={<Changepassword />} />
+        <Route path="/changepassword" element={<Changepassword />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
