@@ -2,8 +2,7 @@ import React, { useState, useRef } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import ReCAPTCHA from "react-google-recaptcha";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 function App() {

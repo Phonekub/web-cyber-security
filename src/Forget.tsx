@@ -2,8 +2,7 @@ import React, { useState, useRef } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import ReCAPTCHA from "react-google-recaptcha";
+import { faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 function App() {
@@ -13,15 +12,8 @@ function App() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
-  const [pwderror, setPwderror] = useState("");
   const [all, setAll] =useState("");
 
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
-
-  const onCaptchaChange = (token: string | null) => {
-    setCaptchaToken(token);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +24,8 @@ function App() {
       setEmail("");
       setPwd("");
     }
-    if (!captchaToken) {
-      alert("Confirm reCAPTCHA");
-      return;
-    }
-    console.log({ user, email, pwd, captchaToken });
+
+    console.log({ user, email, pwd });
   };
   return (
     <Card className="container">
