@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faEnvelope, faLock,faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,10 @@ function App() {
 
   const [pwderror, setPwderror] = useState("");
   const [all, setAll] =useState("");
+
+  const [showPwd, setShowPwd] = useState(false);
+  const toggleShowPwd = () => setShowPwd((prev) => !prev);
+
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -66,15 +70,20 @@ function App() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="input">
+        <div className="input password-input">
           <FontAwesomeIcon icon={faLock} className="icon" />
           <input
-            type="password"
+            type={showPwd ? "text" : "password"}
             placeholder="Password"
             className="text"
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
           />
+          <FontAwesomeIcon
+              icon={showPwd ? faEyeSlash : faEye}
+              className="eye-icon"
+              onClick={toggleShowPwd}
+            />
         </div>
         <div className="error">{all}</div>
         <div className="forget">

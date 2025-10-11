@@ -21,7 +21,7 @@
     align-items: center;
     margin: auto;
     background-color: rgb(223, 222, 222);
-    width: 300px;
+    width: 2    00px;
     height: 40px;
     border-radius: 6px;
 
@@ -130,3 +130,27 @@
     font-size: 25px;
     color: rgb(0, 0, 0);
 }
+.password-input {
+  position: relative;            /* ให้ตำแหน่งลูกเป็น absolute ได้ */
+}
+
+.password-input .text {
+  padding-right: 5px;           /* กันไม่ให้ตัวอักษรทับไอคอน */
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;                   /* ขยับมาติดขวา */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;               /* ปรับขนาดตามชอบ */
+  z-index: 1;                    /* กันถูกซ้อนทับ */
+}
+
+.eye-icon:hover {
+  color: #000;
+}
+
+

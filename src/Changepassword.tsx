@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { faLock,faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 function App() {
@@ -12,6 +12,11 @@ function App() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [pwd2, setPwd2] = useState("");
+  const [showPwd, setShowPwd] = useState(false);
+const [showPwd2, setShowPwd2] = useState(false);
+const toggleShowPwd = () => setShowPwd((prev) => !prev);
+const toggleShowPwd2 = () => setShowPwd2((prev) => !prev);
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,25 +31,35 @@ function App() {
         <div className="underline2"></div>
       </div>
       <form className="inputs" onSubmit={handleSubmit}>
-        <div className="input">
+        <div className="input password-input">
           <FontAwesomeIcon icon={faLock} className="icon" />
           <input
-            type="password"
+            type={showPwd ? "text" : "password"}
             placeholder="New Password"
             className="text"
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
           />
+           <FontAwesomeIcon
+                icon={showPwd ? faEyeSlash : faEye}
+                className="eye-icon"
+                onClick={toggleShowPwd}
+            />
         </div>
-        <div className="input">
+        <div className="input password-input">
           <FontAwesomeIcon icon={faLock} className="icon" />
           <input
-            type="password"
+            type={showPwd2 ? "text" : "password"}
             placeholder="Confirm Password"
             className="text"
             value={pwd2}
             onChange={(e) => setPwd2(e.target.value)}
           />
+           <FontAwesomeIcon
+                icon={showPwd2 ? faEyeSlash : faEye}
+                className="eye-icon"
+                onClick={toggleShowPwd2}
+            />
         </div>
 
         <div className="submit-container1">
