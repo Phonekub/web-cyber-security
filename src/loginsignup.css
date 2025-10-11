@@ -119,8 +119,16 @@
     color: red;
     display: flex;
     align-items: center;
-    padding-left: 20%;
+    padding-left: 25%;
     margin-top: -15px;
+}
+.error1{
+    color: red;
+    display: flex;
+    align-items: center;
+    padding-left: 20%;
+    margin-top: -10px;
+    margin-bottom: -15px;
 }
 .decemail{
     display: flex;

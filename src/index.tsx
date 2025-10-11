@@ -19,7 +19,7 @@ root.render(
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forget" element={<Forget />} />
-        {/* <Route path="/" element={<Changepassword />} /> */}
+        <Route path="/changemail" element={<Changepassword />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
