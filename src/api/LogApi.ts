@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/";
 
 export const getLogs = async () => {
   const response = await fetch(`${BASE_URL}/logs`);
