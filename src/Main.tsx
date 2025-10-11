@@ -10,6 +10,9 @@ function App() {
   const [pwd, setPwd] = useState("");
   const [pwd2, setPwd2] = useState("");
 
+  const [pwderror, setPwderror] = useState("");
+  const [all, setAll] =useState("");
+
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
@@ -19,21 +22,26 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (!user || !email || !pwd || !pwd2) {
-      alert("กรอกข้อมูลให้ครบก่อนนะ");
-      return;
+      setAll("*กรอกข้อมูลไม่ครบ");
+      setUser("");
+      setEmail("");
+      setPwd("");
+      setPwd2("");
     }
     if (pwd !== pwd2) {
-      alert("รหัสผ่านไม่ตรงกัน");
-      return;
+      setPwderror("*password not correct");
+      setUser("");
+      setEmail("");
+      setPwd("");
+      setPwd2("");
     }
     if (!captchaToken) {
-      alert("กรุณายืนยัน reCAPTCHA");
+      alert("Confirm reCAPTCHA");
       return;
     }
     console.log({ user, email, pwd, captchaToken });
-    alert("ส่งฟอร์มแล้ว (เดโม)!");
   };
   return (
     <Card className="container">
@@ -83,6 +91,8 @@ function App() {
             onChange={(e) => setPwd2(e.target.value)}
           />
         </div>
+        <div className="error">{all}</div>
+        <div className="error">{pwderror}</div>
         <div className="forget">
           Forget? <span>Click Here!</span>
         </div>
