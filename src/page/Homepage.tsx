@@ -13,7 +13,7 @@ export default function Homepage() {
         <Button onClick={() => navigate("/system-log",{ state: { viaInternal: true } })} className="systemlog">
           System Log
         </Button>
-        <Button onClick={() => navigate("/")} className="logout">
+        <Button onClick={() => {localStorage.removeItem("username"); navigate("/");}} className="logout">
           Log out
         </Button>
       </div>

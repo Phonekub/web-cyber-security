@@ -1,109 +1,110 @@
 import React, { useEffect, useState } from "react";
-import { getLogs } from "../api/LogApi";
+import "./SystemLog.css";
 
 interface Log {
   id: string;
   date: string;
   category: string;
   message: string;
+  username: string;
+  ipAddress: string;
 }
 
 const SystemLog: React.FC = () => {
   const [logs, setLogs] = useState<Log[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // You can fetch from FastAPI here
-    getLogs().then(setLogs).catch(console.error);
+    const username = localStorage.getItem("username");
+    if (!username) {
+      setLoading(false);
+      return;
+    }
+
+    fetch("http://localhost:5000/logs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ USERNAME: username }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const mappedLogs = (data.logs || []).map((log: any) => ({
+          id: log._id || "",
+          date: log.timestamp || "",
+          category: log.level || "INFO",
+          message: log.message || "",
+          username: log.username || "",
+          ipAddress: log.ip_address || "",
+        }));
+        setLogs(mappedLogs);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const exportToCSV = () => {
-    const headers = ["Date", "Category", "Message"];
-    const rows = logs.map((log) => [log.date, log.category, log.message]);
-    const csv = [headers, ...rows].map((r) => r.join(",")).join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "system_logs.csv";
-    link.click();
+  const getCategoryClass = (category: string): string => {
+    const classes: any = {
+      INFO: "log-category-badge log-category-info",
+      WARNING: "log-category-badge log-category-warning",
+      ERROR: "log-category-badge log-category-error",
+      SUCCESS: "log-category-badge log-category-success",
+    };
+    return classes[category.toUpperCase()] || "log-category-badge log-category-default";
   };
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <h3>System Log</h3>
-        <div style={styles.buttonGroup}>
-          <button style={styles.button} onClick={exportToCSV}>Export To CSV</button>
-          <button style={styles.button} onClick={() => window.location.reload()}>Refresh</button>
-          <button style={styles.button}>Click To Filter Data</button>
+  if (loading) {
+    return (
+      <div className="log-container">
+        <div className="log-loading-container">
+          <p>Loading logs...</p>
         </div>
       </div>
+    );
+  }
 
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.th}>Date</th>
-            <th style={styles.th}>Category</th>
-            <th style={styles.th}>Message</th>
-          </tr>
-        </thead>
-        <tbody>
-          {logs.map((log, index) => (
-            <tr key={log.id || index}>
-              <td style={styles.td}>{log.date}</td>
-              <td style={styles.td}>{log.category}</td>
-              <td style={styles.td}>{log.message}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  return (
+    <div className="log-container">
+      <div className="log-header">
+        <h3 className="log-title">🧾 System Log</h3>
+        <button className="log-button" onClick={() => window.location.reload()}>
+          Refresh
+        </button>
+      </div>
+
+      {logs.length === 0 ? (
+        <div className="log-empty-state">
+          <p>No logs found.</p>
+        </div>
+      ) : (
+        <div className="log-table-container">
+          <table className="log-table">
+            <thead>
+              <tr>
+                <th className="log-th">Date & Time</th>
+                <th className="log-th">Level</th>
+                <th className="log-th">Username</th>
+                <th className="log-th">IP Address</th>
+                <th className="log-th">Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              {logs.map((log) => (
+                <tr key={log.id} className="log-tr">
+                  <td className="log-td">{log.date}</td>
+                  <td className="log-td">
+                    <span className={getCategoryClass(log.category)}>{log.category}</span>
+                  </td>
+                  <td className="log-td">{log.username}</td>
+                  <td className="log-td">{log.ipAddress}</td>
+                  <td className="log-td">{log.message}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
-};
-
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    fontFamily: "Arial, sans-serif",
-    padding: "1rem",
-    backgroundColor: "#f8f8f8",
-    height: "100vh",
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#e8e8e8",
-    padding: "0.5rem 1rem",
-    borderRadius: "4px",
-  },
-  buttonGroup: {
-    display: "flex",
-    gap: "0.5rem",
-  },
-  button: {
-    backgroundColor: "#f3f3f3",
-    border: "1px solid #ccc",
-    padding: "4px 10px",
-    cursor: "pointer",
-    borderRadius: "3px",
-  },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    marginTop: "1rem",
-    backgroundColor: "#fff",
-  },
-  th: {
-    textAlign: "left",
-    borderBottom: "2px solid #ccc",
-    padding: "8px",
-    backgroundColor: "#f0f0f0",
-  },
-  td: {
-    padding: "8px",
-    borderBottom: "1px solid #ddd",
-    fontSize: "14px",
-  },
 };
 
 export default SystemLog;

@@ -57,6 +57,7 @@ function App() {
           PASSWORD: pwd,
         }
       );
+      localStorage.setItem("username",user);
 
       navigate("/homepage",{ state: { viaInternal: true } });
     } catch (err: any) {
