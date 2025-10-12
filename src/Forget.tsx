@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 function App() {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
 
   const [showerror, setShowerror] = useState("");
@@ -21,7 +18,8 @@ function App() {
     setServerError("");
     setSuccessMsg("");
     try {
-      const res = await axios.post(
+      setLoading(true);
+      await axios.post(
         "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/forgot-password",
         {
           EMAILADDR: email,
@@ -41,8 +39,8 @@ function App() {
         err?.response?.data?.error ||
         err?.response?.data?.message ||
         "Server Disconnect";
-      setShowerror(msg); 
-      setServerError(msg); 
+      setShowerror(msg);
+      setServerError(msg);
     } finally {
       setLoading(false);
     }
@@ -66,14 +64,16 @@ function App() {
           />
         </div>
         <div className="error1"> {showerror}</div>
+        {serverError && <div className="error1">{serverError}</div>}
+        {successMsg && <div className="success1">{successMsg}</div>}
         <div className="submit-container1">
           <Button
             type="submit"
             variant="contained"
             className="submit"
-            disabled={!email}
+            disabled={!email || loading}
           >
-            Send
+            {loading ? "Sending..." : "Send"}
           </Button>
         </div>
       </form>

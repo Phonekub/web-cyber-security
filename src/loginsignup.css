@@ -140,26 +140,47 @@
     color: rgb(0, 0, 0);
 }
 .password-input {
-  position: relative;            /* ให้ตำแหน่งลูกเป็น absolute ได้ */
+  position: relative;            
 }
 
 .password-input .text {
-  padding-right: 5px;           /* กันไม่ให้ตัวอักษรทับไอคอน */
+  padding-right: 5px;           
 }
 
 .eye-icon {
   position: absolute;
-  right: 12px;                   /* ขยับมาติดขวา */
+  right: 12px;                   
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   color: #666;
-  font-size: 18px;               /* ปรับขนาดตามชอบ */
-  z-index: 1;                    /* กันถูกซ้อนทับ */
+  font-size: 18px;               
+  z-index: 1;                    
 }
 
 .eye-icon:hover {
   color: #000;
+}
+.success1 {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  line-height: 1.45;
+  font-size: 0.95rem;
+
+  
+  background-color: #dcfce7;        
+  color: #166534;                   
+  border: 1px solid #86efac;        
+  border-left: 4px solid #16a34a;   
+
+  
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+ 
+  animation: success-fade-in 0.25s ease-out;
 }
 
 
