@@ -7,7 +7,7 @@ export default function Homepage() {
 
   return (
     <div className="Header">
-      <h1>🚀 Welcome to Your App Dashboard</h1>
+      <h1> Welcome 🚀</h1>
 
       <div className="FunctionBar">
         <Button onClick={() => navigate("/login")} className="login">
@@ -28,7 +28,7 @@ export default function Homepage() {
       </div>
 
       <p className="description">
-        Built with ❤️ using React + Flask + MongoDB
+        Built by using React + Flask + MongoDB
       </p>
     </div>
   );
