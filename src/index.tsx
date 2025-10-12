@@ -23,7 +23,7 @@ root.render(
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forget" element={<Forget />} />
-        <Route path="/changepassword" element={<Changepassword />} />
+        <Route path="/reset-password/:token" element={<Changepassword />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
