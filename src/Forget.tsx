@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import "./loginsignup.css";
 import { Card, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope,faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function App() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
   const [showerror, setShowerror] = useState("");
@@ -20,7 +23,7 @@ function App() {
     try {
       setLoading(true);
       await axios.post(
-        "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/forgot-password",
+        "http://127.0.0.1:5000/forgot-password",
         {
           EMAILADDR: email,
         }
@@ -75,6 +78,10 @@ function App() {
           >
             {loading ? "Sending..." : "Send"}
           </Button>
+        </div>
+        <div className="back" onClick={() => navigate("/login")}  >
+          <FontAwesomeIcon icon={faChevronLeft} className="icon1"/>
+          <div>Back to Login</div>
         </div>
       </form>
     </Card>

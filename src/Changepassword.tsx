@@ -26,7 +26,7 @@ function App() {
   const toggleShowPwd = () => setShowPwd((prev) => !prev);
   const toggleShowPwd2 = () => setShowPwd2((prev) => !prev);
 
-  const url = `https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/reset-password/${encodeURIComponent(
+  const url = `http://127.0.0.1:5000/reset-password/${encodeURIComponent(
     token
   )}`;
 

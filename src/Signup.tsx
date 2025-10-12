@@ -12,6 +12,7 @@ import {
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ClassNames } from "@emotion/react";
 function App() {
   const navigate = useNavigate();
 
@@ -59,7 +60,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/users",
+        "http://127.0.0.1:5000/users",
         {
           USERNAME: user,
           EMAILADDR: email,
@@ -142,7 +143,7 @@ function App() {
         <div className="error">{pwderror}</div>
         <div className="error"> {showerror}</div>
         <div className="forget">
-          Forget? <span onClick={() => navigate("/forget")}>Click Here!</span>
+          Forget? <span onClick={() => navigate("/forget") }>Click Here!</span>
         </div>
         <div className="cap">
           <ReCAPTCHA
@@ -151,7 +152,7 @@ function App() {
             onChange={onCaptchaChange}
           />
         </div>
-        <div className="submit-container">
+        <div className="submit-container0">
           <Button
             type="submit"
             variant="contained"

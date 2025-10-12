@@ -51,7 +51,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "https://symmetrical-waddle-r4gr4q6qjwxwfqp9-5000.app.github.dev/login",
+        "http://127.0.0.1:5000/login",
         {
           USERNAME: user,
           PASSWORD: pwd,
@@ -108,6 +108,7 @@ function App() {
         <div className="error"> {showerror}</div>
         <div className="forget">
           Forget? <span onClick={() => navigate("/forget")}>Click Here!</span>
+           <div className="underline3"></div>
         </div>
         <div className="cap">
           <ReCAPTCHA
@@ -125,6 +126,10 @@ function App() {
           >
             Login
           </Button>
+        </div>
+        <div className="sign" >
+           <div className="forget1">Don't have an account? <span onClick={() => navigate("/signup") }>Sign Up</span></div>
+            <div className="underline4"></div>
         </div>
       </form>
     </Card>
