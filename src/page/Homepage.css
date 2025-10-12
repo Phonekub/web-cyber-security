@@ -1,0 +1,26 @@
+h1,p{
+    color: white;
+}
+
+.Header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.FunctionBar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+.FunctionBar button {
+  color: #ffffff;          /* text color */
+  background-color: #5c899e; /* background color */
+}
+
+.FunctionBar button:hover {
+  background-color: #019aec; /* darker blue on hover */
+}
