@@ -10,20 +10,11 @@ export default function Homepage() {
       <h1> Welcome 🚀</h1>
 
       <div className="FunctionBar">
-        <Button onClick={() => navigate("/login")} className="login">
-          Login
-        </Button>
-        <Button onClick={() => navigate("/signup")} className="signup">
-          Sign Up
-        </Button>
-        <Button onClick={() => navigate("/forget")} className="forgetpassword">
-          Forgot Password
-        </Button>
-        <Button onClick={() => navigate("/changepassword")} className="changepassword">
-          Change Password
-        </Button>
         <Button onClick={() => navigate("/system-log")} className="systemlog">
           System Log
+        </Button>
+        <Button onClick={() => navigate("/")} className="logout">
+          Log out
         </Button>
       </div>
 

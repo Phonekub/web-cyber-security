@@ -58,7 +58,7 @@ function App() {
         }
       );
 
-      navigate("/forget"); //อย่าลืมเปลี่ยน
+      navigate("/homepage");
     } catch (err: any) {
       // console.log("response:", err.data);
       // console.error(err);
@@ -128,7 +128,7 @@ function App() {
           </Button>
         </div>
         <div className="sign" >
-           <div className="forget1">Don't have an account? <span onClick={() => navigate("/signup") }>Sign Up</span></div>
+           <div className="forget1">Don't have an account? <span onClick={() => navigate("/") }>Sign Up</span></div>
             <div className="underline4"></div>
         </div>
       </form>

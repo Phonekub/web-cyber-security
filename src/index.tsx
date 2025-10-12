@@ -17,9 +17,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage/>} />
+        <Route path="/homepage" element={<Homepage/>} />
         <Route path="/system-log" element={<SystemLog/>}/>  
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forget" element={<Forget />} />
         <Route path="/reset-password/:token" element={<Changepassword />} />
