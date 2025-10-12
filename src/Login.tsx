@@ -58,7 +58,7 @@ function App() {
         }
       );
 
-      navigate("/homepage");
+      navigate("/homepage",{ state: { viaInternal: true } });
     } catch (err: any) {
       // console.log("response:", err.data);
       // console.error(err);
