@@ -79,7 +79,7 @@ function App() {
             {loading ? "Sending..." : "Send"}
           </Button>
         </div>
-        <div className="back" onClick={() => navigate("/login")}  >
+        <div className="back" onClick={() => navigate("/login",{ state: { viaInternal: true } })}  >
           <FontAwesomeIcon icon={faChevronLeft} className="icon1"/>
           <div>Back to Login</div>
         </div>

@@ -57,7 +57,7 @@ function App() {
       });
 
       setSuccessMsg("เปลี่ยนรหัสผ่านเรียบร้อย");
-      setTimeout(() => navigate("/login"), 1200);
+      setTimeout(() => navigate("/login",{ state: { viaInternal: true } }), 1200);
     } catch (err: any) {
       const msg =
         err?.response?.data?.error ||

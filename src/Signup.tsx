@@ -69,7 +69,7 @@ function App() {
         }
       );
 
-      navigate("/login");
+      navigate("/login",{ state: { viaInternal: true } });
     } catch (err: any) {
       // console.log("response:", err.data);
       // console.error(err);
@@ -143,7 +143,7 @@ function App() {
         <div className="error">{pwderror}</div>
         <div className="error"> {showerror}</div>
         <div className="forget">
-          Forget? <span onClick={() => navigate("/forget") }>Click Here!</span><div className="underline3"></div>
+          Forget? <span onClick={() => navigate("/forget",{ state: { viaInternal: true } }) }>Click Here!</span><div className="underline3"></div>
         </div>
         <div className="cap">
           <ReCAPTCHA
@@ -165,7 +165,7 @@ function App() {
             type="button"
             variant="outlined"
             className="submit"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/login", { state: { viaInternal: true } })}
           >
             Login
           </Button>

@@ -107,7 +107,7 @@ function App() {
         <div className="error">{all}</div>
         <div className="error"> {showerror}</div>
         <div className="forget">
-          Forget? <span onClick={() => navigate("/forget")}>Click Here!</span>
+          Forget? <span onClick={() => navigate("/forget",{ state: { viaInternal: true } })}>Click Here!</span>
            <div className="underline3"></div>
         </div>
         <div className="cap">

@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import Homepage from './page/Homepage';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import Forget from './Forget';
 import Changepassword from './Changepassword';
-
+import NavigationGate  from "./ProtectedRoute";
 import "./index.css";
 import SystemLog from './page/SystemLog';
 const root = ReactDOM.createRoot(
@@ -17,12 +17,20 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/homepage" element={<Homepage/>} />
-        <Route path="/system-log" element={<SystemLog/>}/>  
-        <Route path="/" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forget" element={<Forget />} />
-        <Route path="/reset-password/:token" element={<Changepassword />} />
+
+       
+          
+          <Route path="/" element={<Signup />} />
+          <Route path="/reset-password/:token" element={<Changepassword />} />
+
+         <Route element={<NavigationGate />}>
+          <Route path="/system-log" element={<SystemLog/>}/>  
+          <Route path="/homepage" element={<Homepage/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forget" element={<Forget />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
