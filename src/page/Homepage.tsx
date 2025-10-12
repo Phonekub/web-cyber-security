@@ -10,7 +10,7 @@ export default function Homepage() {
       <h1> Welcome 🚀</h1>
 
       <div className="FunctionBar">
-        <Button onClick={() => navigate("/system-log")} className="systemlog">
+        <Button onClick={() => navigate("/system-log",{ state: { viaInternal: true } })} className="systemlog">
           System Log
         </Button>
         <Button onClick={() => navigate("/")} className="logout">
