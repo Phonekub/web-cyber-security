@@ -17,19 +17,21 @@ const SystemLog: React.FC = () => {
   const recordsPerPage = 30;
 
   useEffect(() => {
-    const username = localStorage.getItem("username");
-    console.log("📌 Username from localStorage:", username);
+    const token = localStorage.getItem("token");
+    console.log("📌 Username from localStorage:", token);
     
-    if (!username) {
+    if (!token) {
       console.error("❌ No username found");
       setLoading(false);
       return;
     }
 
     fetch("http://localhost:5000/logs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ USERNAME: username }),
+      method: "GET", // ✅ เปลี่ยนเป็น GET เพราะ endpoint คุณเป็น GET แล้ว
+      headers: {
+        "Authorization": `Bearer ${token}`, // ✅ ใส่ token ใน header
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => {
         console.log("📡 Response status:", res.status);

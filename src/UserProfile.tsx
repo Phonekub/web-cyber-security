@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import "./UserProfile.css";
 
 const UserProfile: React.FC = () => {
@@ -8,9 +9,15 @@ const UserProfile: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername);
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        // const decoded = jwtDecode(token);
+        const decoded = jwtDecode<any>(token);
+        setUsername(decoded.USERNAME);
+      } catch (err) {
+        console.error("Invalid token", err)
+      }
     }
   }, []);
 
