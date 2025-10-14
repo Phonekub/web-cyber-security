@@ -107,8 +107,8 @@ function App() {
             onClick={toggleShowPwd2}
           />
         </div>
-        {showerror && <div className="error1">{showerror}</div>}
-        {serverError && <div className="error1">{serverError}</div>}
+        {showerror && <div className="error2">{showerror}</div>}
+        {serverError && <div className="error2">{serverError}</div>}
         {successMsg && <div className="success1">{successMsg}</div>}
         <div className="submit-container1">
           <Button
