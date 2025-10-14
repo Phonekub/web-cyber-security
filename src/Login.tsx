@@ -38,8 +38,10 @@ function App() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setAll("");
+    setShowerror("");
+    setServerError("");
     if (!user || !pwd) {
-      setAll("*กรอกข้อมูลไม่ครบ");
+      setAll("*กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
       setUser("");
       setPwd("");
     }
@@ -105,8 +107,10 @@ function App() {
             onClick={toggleShowPwd}
           />
         </div>
-        <div className="error">{all}</div>
-        <div className="error"> {showerror}</div>
+        {/* <div className="error">{all}</div>
+        <div className="error"> {showerror}</div> */}
+        {all && <div className="error">{all}</div>}
+        {!all && showerror && <div className="error">{showerror}</div>}
         <div className="forget">
           Forget? <span onClick={() => navigate("/forget",{ state: { viaInternal: true } })}>Click Here!</span>
            <div className="underline3"></div>
