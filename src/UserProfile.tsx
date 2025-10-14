@@ -5,6 +5,7 @@ import "./UserProfile.css";
 
 const UserProfile: React.FC = () => {
   const [username, setUsername] = useState<string>("");
+  const [role, setRole] = useState<string>("");
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -15,8 +16,10 @@ const UserProfile: React.FC = () => {
         // const decoded = jwtDecode(token);
         const decoded = jwtDecode<any>(token);
         setUsername(decoded.USERNAME);
+        setRole(decoded.ROLE);
       } catch (err) {
         console.error("Invalid token", err)
+        setRole("");
       }
     }
   }, []);
@@ -56,16 +59,17 @@ const UserProfile: React.FC = () => {
             <div className="user-info-icon">👤</div>
             <div>
               <div className="user-info-name">{username}</div>
-              <div className="user-info-status">Online</div>
             </div>
           </div>
           <div className="dropdown-divider"></div>
           <button className="dropdown-item" onClick={() => navigate("/homepage", { state: { viaInternal: true } })}>
             🏠 Home
           </button>
-          <button className="dropdown-item" onClick={() => navigate("/system-log", { state: { viaInternal: true } })}>
-            🧾 System Log
-          </button>
+          {role === "admin" && (
+            <button className="dropdown-item" onClick={() => navigate("/system-log", { state: { viaInternal: true } })}>
+              🧾 System Log
+            </button>
+          )}
           <div className="dropdown-divider"></div>
           <button className="dropdown-item logout" onClick={handleLogout}>
             🚪 Logout
