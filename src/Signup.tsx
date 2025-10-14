@@ -44,7 +44,7 @@ function App() {
     setPwderror("");
     setShowerror("");
     if (!user || !email || !pwd || !pwd2) {
-      setAll("*กรอกข้อมูลไม่ครบ");
+      setAll("*กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
       return;
     }
     if (pwd !== pwd2) {
