@@ -1,42 +1,48 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
-import Homepage from './page/Homepage';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+import Homepage from "./page/Homepage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
-import Forget from './Forget';
-import Changepassword from './Changepassword';
-import NavigationGate  from "./ProtectedRoute";
+import Forget from "./Forget";
+import Changepassword from "./Changepassword";
+import NavigationGate from "./ProtectedRoute";
 import "./index.css";
-import SystemLog from './page/SystemLog';
+import SystemLog from "./page/SystemLog";
+import EntryRoute from "./EntryRoute";
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/reset-password/:token" element={<Changepassword />} />
+        <Route path="/" element={<EntryRoute />} />
 
-       
-          
-          <Route path="/" element={<Signup />} />
-          <Route path="/reset-password/:token" element={<Changepassword />} />
-
-         <Route element={<NavigationGate />}>
-          <Route path="/system-log" element={<SystemLog/>}/>  
-          <Route path="/homepage" element={<Homepage/>} />
-          <Route path="/login" element={<Login />} />
+        <Route element={<NavigationGate />}>
+          <Route
+            path="*"
+            element={
+              localStorage.getItem("token") ? (
+                <Navigate to="/homepage" replace />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
+          <Route path="/system-log" element={<SystemLog />} />
+          <Route path="/homepage" element={<Homepage />} />
           <Route path="/forget" element={<Forget />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+       
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();

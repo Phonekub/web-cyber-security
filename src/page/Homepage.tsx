@@ -11,11 +11,11 @@ export default function Homepage() {
   const [role, setRole] = useState<string>("");
 
   useEffect(() => {
-    // ✅ ดึง token จาก localStorage
+    //  ดึง token จาก localStorage
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        // ✅ decode JWT เพื่อดูข้อมูล role
+        //  decode JWT เพื่อดูข้อมูล role
         const decoded = jwtDecode<any>(token);
         setRole(decoded.ROLE);
       } catch (err) {
